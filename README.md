@@ -12,9 +12,18 @@ Given that we have containerized the GlusterFS peer processes into an image, we 
 
 The first factor to consider is that each of the GlusterFS Peers will need access to local storage that can be used as the GlusterFS Peer's Brick. It will likely be the case that only certain nodes in the Kubernetes Cluster will have access to local storage so this requires a way of ensuring that the pods only land on suitable Kubernetes Nodes. We achieve this by having a specific pod for each peer. Each of these pods uses a Kubernetes NodeSelector label to ensure that it is always scheduled on a specific Host.
 
-The second factor to consider is networking. This solution works with both Flannel and Docker Host Networking. This example uses Docker Host Networking to keep things a little cleaner and also because at Red Hat we are interested in exploring different methods of providing QoS for Storage Traffic and one approach could involve physically separating the network traffic by putting the compute traffic on eth0 and the storage traffic on eth1. We achieve this by using the hostNetwork=true directive in the Pod. Note that this requires KUBELET_ARGS="--host-network-sources=*" to be set in /etc/kubernetes/kubelet for each of the Kubernetes Nodes.
+The second factor to consider is networking. This solution works with both Flannel and Docker Host Networking. This example uses Docker Host Networking to keep things a little cleaner and also because at Red Hat we are interested in exploring different methods of providing QoS for Storage Traffic and one approach could involve physically separating the network traffic by putting the compute traffic on eth0 and the storage traffic on eth1. We achieve this by using hostNetwork: true in the Pod and setting the following in the /etc/kubernetes/kubelet on all nodes in the cluster:
+```
+KUBELET_ARGS="--host-network-sources=*"
+```
 
 The third factor is properly identifying the brick and mounting it into the correct location of the GlusterFS Peer container. We achieve this using the HostPath Kubernetes Volume Plugin which allows us to mount local storage into a container from the Host. We assume that the local direct attached storage has already been prepared and made available at a given path on the Host. For our examples, that path is /mnt/brick1.
+
+The fourth factor is that the GlusterFS images need to run in privileged mode. We enable this by using privileged: true in the Pod and setting the following in the /etc/kubernetes/config on all nodes in the cluster:
+```
+KUBE_ALLOW_PRIV="--allow-privileged=true"
+```
+
 
 ## Implementation
 
