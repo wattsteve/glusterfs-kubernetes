@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: gluster-1
+  labels:
+    name: gluster-1
+spec:
+  hostNetwork: true
+  nodeSelector:
+    name: worker-1
+  containers:
+    - name: glusterfs
+      image: gluster/rhgs-3.1.0
+      ports:
+        - name: web
+          containerPort: 80
+      volumeMounts:
+          - name: brickpath
+            mountPath: "/mnt/brick1"
+      securityContext: 
+       capabilities: {}
+       privileged: true
+  volumes:
+    - name: brickpath
+      hostPath:
+        path: "/mnt/brick1"
