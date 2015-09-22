@@ -34,10 +34,10 @@ We begin by submitting 2 unique pods (one for each peer), which can be seen here
 ```
 [root@master ~]# kubectl create -f gluster-1.yaml
 [root@master ~]# kubectl create -f gluster-2.yaml
-[root@master ~]# kubectl get pods
-NAME        READY     STATUS    RESTARTS   AGE
-gluster-1   1/1       Running   0          1h
-gluster-2   1/1       Running   0          1h
+[root@master ~]# kubectl get pods -o wide
+NAME        READY     STATUS    RESTARTS   AGE       NODE
+gluster-1   1/1       Running   0          1h        worker-1
+gluster-2   1/1       Running   0          1h        worker-2
 ```
 
 Now that the peers are running, we can shell into the worker-1 node and run "docker ps" to see the container ID for the peer image that was launched. 
@@ -64,7 +64,7 @@ State: Peer in Cluster (Connected)
 Now that the Trusted Storage Pool is established between the worker-1 peer and the worker-2 peer, while staying inside the container, we can create a GlusterFS volume
 ```
 [root@worker-1 /]# gluster volume create newvol replica 2 192.168.58.21:/mnt/brick1/newvol 192.168.58.22:/mnt/brick1/newvol
-[root@worker-1 /]# gluster volume start myvolume
+[root@worker-1 /]# gluster volume start newvol
 [root@worker-1 /]# gluster volume status           
 Status of volume: newvol
 Gluster process                             TCP Port  RDMA Port  Online  Pid
