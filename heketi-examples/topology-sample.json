@@ -1,0 +1,56 @@
+{
+    "clusters": [
+        {
+            "nodes": [
+                {
+                    "node": {
+                        "hostnames": {
+                            "manage": [
+                                "ip-172-20-0-217.ec2.internal"
+                            ],
+                            "storage": [
+                                "ip-172-20-0-217.ec2.internal"
+                            ]
+                        },
+                        "zone": 1
+                    },
+                    "devices": [
+                        "/dev/xvdg"
+                    ]
+                },
+                { 
+                    "node": {
+                        "hostnames": {
+                            "manage": [
+                                "ip-172-20-0-218.ec2.internal"
+                            ],
+                            "storage": [
+                                "ip-172-20-0-218.ec2.internal"
+                            ]
+                        },
+                        "zone": 1
+                    },
+                    "devices": [
+                        "/dev/xvdg"
+                    ]
+                },
+                {
+                    "node": {
+                        "hostnames": {
+                            "manage": [
+                                "ip-172-20-0-219.ec2.internal"
+                            ],
+                            "storage": [
+                                "ip-172-20-0-219.ec2.internal"
+                            ]
+                        },
+                        "zone": 1
+                    },
+                    "devices": [
+                        "/dev/xvdg"
+                    ]
+                }                      
+            ]
+        }
+    ]
+}
