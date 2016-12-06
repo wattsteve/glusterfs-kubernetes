@@ -1,3 +1,6 @@
+Note: This repo is (an old) prototype I built and it has subsequently moved to the glusterfs community and is now being maintained there. You can access it at https://github.com/gluster/gluster-kubernetes
+
+
 # Running GlusterFS inside Kubernetes
 
 I thought it would be interesting to explore a converged scenario where Kubernetes was running the containers for the compute runtimes as well as the containers for the storage runtimes. This is useful in that it allows you to have a single infrastructure for the full stack. I thought I'd write up what I did to get it working given that its a new scenario for Kubernetes and also uses some aspects of Kubernetes that aren't documented in much detail.
@@ -81,7 +84,3 @@ Task Status of Volume newvol
 There are no active volume tasks
 ```
 Now that the Volume is created, we can then make it accessible to any of the compute containers running in Kubernetes as demonstrated by the [GlusterFS Kubernetes Volume Plugin Documentation](https://github.com/kubernetes/kubernetes/tree/master/examples/glusterfs)
-
-## Future Direction
-
-At present, we're exploring the usage of etcd to allow the GlusterFS peer containers to perform certain actions on initialization, such as automatically forming the trusted storage pool . [You can track this work here.](https://github.com/pcuzner/docker-gluster-centos)
