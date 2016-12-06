@@ -1,4 +1,4 @@
-Note: This repo is (an old) prototype I built and it has subsequently moved to the glusterfs community and is now being maintained there. You can access it at https://github.com/gluster/gluster-kubernetes
+Note: This repo is an old prototype that I had built and it has subsequently moved to the glusterfs community and is now being maintained there. You can access it at https://github.com/gluster/gluster-kubernetes
 
 
 # Running GlusterFS inside Kubernetes
